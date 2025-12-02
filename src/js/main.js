@@ -32,3 +32,16 @@ const emptyState = document.getElementById('emptyState');
 
 const noExpensesMsg = document.getElementById('noExpensesMsg');
 const spendingChartCanvas = document.getElementById('spendingChart');
+
+// ==================== 
+// 3. Categories
+// ====================
+// --- drop down categories --- //
+categories.forEach(cat => {
+    const option = document.createElement('option');
+    option.value = cat.value;
+    option.textContent = cat.text;
+    categorySelect.appendChild(option);
+});
+
+updateTypeButtons();
