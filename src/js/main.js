@@ -45,3 +45,47 @@ categories.forEach(cat => {
 });
 
 updateTypeButtons();
+
+// ==================== 
+// 4. Event Listeners
+// ====================
+// --- Toggle between expense and income buttons
+expenseBtn.addEventListener('click', () => {
+    currentType = 'expenses';
+    updateTypeButtons();
+});
+
+incomeBtn.addEventListener('click', () => {
+    currentType = 'income';
+    updateTypeButtons();
+});
+
+// --- handle form submission --- //
+transactionForm.addEventListener('submit', (e) => {
+    e.preventDefault(); // -- Prevent page reload
+
+    // -- get values from inputs -- //
+    const amount = parseFloat(document.getElementById('amount').value);
+    const category = categorySelect.value;
+    const description = document.getElementById('description').value;
+    const date = document.getElementById('date').value
+
+    // -- transaction object -- //
+    const transaction = {
+        id: Date.now(),
+        type: currentType, // -- income or expense
+        amount: amount,
+        category: category,
+        description: description,
+        date: date
+    };
+
+    // --- array to update --- //
+    transaction.push(transaction);
+    updateUI();
+
+    // --- reset form --- //
+    transactionForm.reset();
+    // --- reset date --- //
+    document.getElementById('date').valueAsDate = new Date ();
+});
