@@ -1,89 +1,164 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./src/css/style.css">
     <script src="./src/js/main.js" defer></script>
-
-  <!-- Hello Team, Please see added notes for review:
-       This is just the HTML skeleton / structure for the SpendingChart component.
-       The real logic (filtering transactions, building the data, drawing the pie chart)
-       happens in TypeScript/JavaScript with Recharts, NOT in this file.- By TN
-  -->
-
-  <title>Your Daily Expense Tracker</title>
-</head>
-<body>
-  <!-- =========================================================
-       Hi this should  help with the OUTER CARD WRAPPER
-       Matches: <div className="bg-white rounded-lg shadow p-6">
-       Purpose: A card box around the whole “Spending by Category” section. By TN
-  ========================================================== -->
-  <div class="spending-chart-card bg-white rounded-lg shadow p-6">
-    
-    <!-- =====================================================
-         TITLE / HEADER
-         Matches: <h2 className="text-gray-900 mb-4">Spending by Category</h2>
-         Purpose: Section heading so users know what they’re looking at. By TN
-    ====================================================== -->
-    <h2 class="text-gray-900 mb-4">
-      Spending by Category
-    </h2>
-
-    <!-- =====================================================
-         OK SO THE CHART AREA WRAPPER (WHEN THERE *IS* DATA)
-         Here: it’s just a placeholder box where the pie chart would be drawn.
-         Note: In the real app, Recharts will create an <svg> inside here.
-    ====================================================== -->
-    <div class="chart-area" style="width: 100%; height: 300px;">
-      
-      <!-- Continuing to add the placeholders by TN
-           Here we just leave a placeholder so we know where it goes.
-      -->
-      <div class="pie-chart-placeholder">
-        
-      </div>
-
-      <!-- =================================================
-           OK SO THE TOOLTIP PLACEHOLDER
-           Purpose: Shows the category + amount when user hovers.
-           Here: we just mark a spot where JS can hook in a tooltip.By TN
-      ================================================== -->
-      <div class="chart-tooltip-placeholder">
-        <!-- Tooltip content is created by the chart library -->
-      </div>
-
-      <!-- =================================================
-           ANOTHER PLACEHOLDER
-           Purpose: Shows which color belongs to which category.
-           Here: we just mark a spot to remind ourselves it exists. BY TN
-      ================================================== -->
-      <div class="chart-legend-placeholder">
-        <!-- Legend items (color + category name) would go here -->
-      </div>
-    </div>
-
-    <!-- =====================================================
-         EMPTY STATE (WHEN THERE IS *NO* EXPENSE DATA)
-         Purpose: Friendly message when there are no expenses.
-         HEY GUYS NOTE: In a real app, you only show EITHER the chart OR this box,
-               not both at the same time.
-    ====================================================== -->
-    <div class="empty-state h-64 flex items-center justify-center">
-      <p class="text-gray-500">
-        No expenses to display
-      </p>
-    </div>
-
-    <!-- I Believe this part is were you would:
-         - Calculate expensesByCategory from transactions
-         - If no data → show the .empty-state and hide the .chart-area
-         - If there is data → show the .chart-area and hide the .empty-state
-         That logic is not in HTML. HTML only gives us the boxes.
+    <!-- NOTE for the team:
+         This makes the layout adjust on phones and desktops.
     -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Tracker Skeleton</title>
+</head>
 
-  </div>
-  
+<body>
+
+    <!-- NOTE To Team:
+         This main wrapper keeps everything grouped.
+    -->
+    <div>
+
+        <!-- ==================== -->
+        <!-- HEADER SECTION       -->
+        <!-- ==================== -->
+        <header>
+            <!-- Page title -->
+            <h1>Budget Tracker</h1>
+
+            <!-- Short description -->
+            <p>Manage your income and expenses</p>
+        </header>
+
+        <!-- ==================== -->
+        <!-- SUMMARY SECTION      -->
+        <!-- ==================== -->
+        <!-- NOTE:
+             This shows 3 boxes:
+             1. Total Income
+             2. Total Expenses
+             3. Balance
+        -->
+        <section>
+
+            <!-- Total Income -->
+            <div>
+                <h2>Total Income</h2>
+                <p id="totalIncome">$0.00</p>
+            </div>
+
+            <!-- Total Expenses -->
+            <div>
+                <h2>Total Expenses</h2>
+                <p id="totalExpenses">$0.00</p>
+            </div>
+
+            <!-- Balance -->
+            <div>
+                <h2>Balance</h2>
+                <p id="balance">$0.00</p>
+            </div>
+
+        </section>
+
+        <!-- ========================================== -->
+        <!-- FORM + CHART SECTION (Two Side-by-Side)    -->
+        <!-- ========================================== -->
+        <section>
+
+            <!-- ==================== -->
+            <!-- ADD TRANSACTION FORM -->
+            <!-- ==================== -->
+            <div>
+                <h2>Add Transaction</h2>
+
+                <!-- NOTE:
+                     JS listens for this form submission.
+                -->
+                <form id="transactionForm">
+
+                    <!-- Type: Income or Expense -->
+                    <div>
+                        <p>Type</p>
+                        <!-- NOTE:
+                             These are buttons, not radio inputs.
+                        -->
+                        <button type="button" id="expenseBtn">Expense</button>
+                        <button type="button" id="incomeBtn">Income</button>
+                    </div>
+
+                    <!-- Amount -->
+                    <div>
+                        <label for="amount">Amount</label>
+                        <input id="amount" type="number" required />
+                    </div>
+
+                    <!-- Category -->
+                    <div>
+                        <label for="category">Category</label>
+
+                        <!-- NOTE:
+                             JS will populate the options here.
+                        -->
+                        <select id="category" required>
+                            <option value="">Select category</option>
+                        </select>
+                    </div>
+
+                    <!-- Description -->
+                    <div>
+                        <label for="description">Description</label>
+                        <input id="description" type="text" required />
+                    </div>
+
+                    <!-- Date -->
+                    <div>
+                        <label for="date">Date</label>
+                        <input id="date" type="date" required />
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit">Add Transaction</button>
+
+                </form>
+            </div>
+
+            <!-- ===================== -->
+            <!-- SPENDING PIE CHART    -->
+            <!-- ===================== -->
+            <div>
+                <h2>Spending by Category</h2>
+
+                <!-- NOTE:
+                     Chart.js will draw inside this canvas.
+                -->
+                <canvas id="spendingChart"></canvas>
+
+                <!-- Appears only when no expenses exist -->
+                <p id="noExpensesMsg">No expenses to display</p>
+            </div>
+
+        </section>
+
+        <!-- ===================== -->
+        <!-- TRANSACTION HISTORY   -->
+        <!-- ===================== -->
+        <section>
+
+            <h2>Transaction History</h2>
+
+            <!-- NOTE:
+                 JS will add each transaction here as a div.
+            -->
+            <div id="transactionList"></div>
+
+            <!-- If no transactions exist -->
+            <div id="emptyState">
+                <p>No transactions yet. Add your first one above.</p>
+            </div>
+
+        </section>
+
+    </div>
 </body>
 </html>
