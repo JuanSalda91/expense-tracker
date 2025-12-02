@@ -1,179 +1,401 @@
+/* ============================
+   GLOBAL STYLES
+   ============================ */
 
+:root {
+  --bg-body: #f3f4f6;
+  --bg-card: #ffffff;
+  --bg-hero: #111827;
+  --primary: #2563eb;
+  --primary-light: #60a5fa;
+  --danger: #ef4444;
+  --text-main: #111827;
+  --text-muted: #6b7280;
+  --border-subtle: #e5e7eb;
+  --shadow-soft: 0 15px 30px rgba(15, 23, 42, 0.12);
+  --radius-lg: 16px;
+  --radius-md: 10px;
+  --radius-sm: 6px;
+}
 
-/* =====================================
-   Case Study 1: Interactive Landing Page
-
-   This file includes:
-   - Navbar with 3+ links
-   - Hero section with headline + CTA
-   - Features section (3–4 cards)
-   - CTA section for JavaScript interaction
-   - Modal for popup interaction
-   - Responsive design + hamburger menu
-   ===== */
-
-/* ==========================================
-   Step 1: Reset default browser styles
-   ==== */
-* {
-  margin: 0;
-  padding: 0;
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-/* ================================
-   Step 2: Global Body Styling - font, colors, and layout baseline.
-================================ */
+html,
 body {
-  font-family: Arial, sans-serif;
-  background-color: #ffffff; /* Clean white background */
-  color: #333333;            /* Standard dark text */
-  line-height: 1.6;}
-
-
-/* ================================
-   Step 3: Navbar Styling (MVP Requirement)
-   - Contains 3+ navigation links
-   - Dark background with white text
-   - Includes hamburger menu for mobile
-================================ */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #333333;  /* Dark header */
-  padding: 1rem 2rem;
-  color: white;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background-color: var(--bg-body);
+  color: var(--text-main);
 }
 
-/* Nav links */
-.navbar a {
-  color: #ffffff;
-  text-decoration: none;
-  margin: 0 1rem;
-  transition: color 0.3s ease; /* Smooth hover animation */
+img {
+  max-width: 100%;
+  display: block;
 }
 
-.navbar a:hover {
-  color: #4CAF50; /* Green hover for interactivity */
+/* ============================
+   MAIN APP WRAPPER
+   ============================ */
+
+body > div {
+  max-width: 1120px;
+  margin: 2.5rem auto 3rem;
+  padding: 2rem 1.75rem 2.5rem;
+  background-color: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
 }
 
-/* Hamburger menu for < 768px screen */
-.hamburger {
-  display: none; 
-  flex-direction: column;
-  cursor: pointer;
-}
+/* ============================
+   HEADER
+   ============================ */
 
-.hamburger span {
-  height: 3px;
-  width: 25px;
-  background: #ffffff;
-  margin: 4px 0;
-}
-
-
-/* ================================
-   Step 4: Hero Section (MVP Requirement)
-   - Includes headline and primary CTA button
-   - Background hero image with dark overlay
-================================ */
-.hero {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 90vh; /* Large welcoming full-screen look */
+header {
   text-align: center;
-  
-  /* Background image + overlay for readability */
-  background: linear-gradient(
-              rgba(0,0,0,0.5), 
-              rgba(0,0,0,0.5)
-            ),
-            url('IMAGE HERE') 
-            no-repeat center center/cover;
+  margin-bottom: 2rem;
+}
 
-  color: #ffffff;
+header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+header p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* ============================
+   HERO SECTION (1st Section)
+   ============================ */
+
+.hero {
+  width: 100%;
+  background: radial-gradient(circle at top left, #1f2937, #020617);
+  color: #f9fafb;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-radius: var(--radius-md);
+  margin-bottom: 2.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .hero h1 {
-  font-size: 3rem;
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+  line-height: 1.2;
   margin-bottom: 1rem;
+  margin-top: 0;
 }
 
-/* Main CTA button (used to trigger modal via JS) */
-.hero .cta-btn {
-  background: #4CAF50;  
-  color: #ffffff;
+.hero p {
+  font-size: 1rem;
+  color: #e5e7eb;
+  max-width: 42rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+/* Style for the future CTA button mentioned in comments */
+.cta-btn {
+  display: inline-block;
   padding: 0.75rem 1.5rem;
+  border-radius: 999px;
   border: none;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: #f9fafb;
+  font-weight: 600;
+  font-size: 0.95rem;
   cursor: pointer;
-  font-size: 1.2rem;
-  transition: transform 0.3s ease, background 0.3s ease;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
 }
 
-.hero .cta-btn:hover {
-  transform: scale(1.05);          /* Stretch goal: animated hover */
-  background: #388E3C;             /* Darker green */
+.cta-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 30px rgba(37, 99, 235, 0.55);
+  opacity: 0.95;
 }
 
+/* ============================
+   SUMMARY SECTION (2nd Section)
+   ============================ */
 
-/* ================================
-   Step 5: Features Section
-   - Displays 3–4 product highlights (MVP Requirement)
-   - Uses CSS Grid for responsiveness
-================================ */
-.features {
+body > div > section:nth-of-type(2) {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  padding: 3rem;
-  background: #f4f4f4; /* Light contrast section */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 2.25rem;
 }
 
-/* Feature card design */
-.feature {
-  background: #ffffff;
-  padding: 2rem;
-  border-radius: 8px;
-  text-align: center;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+body > div > section:nth-of-type(2) > div {
+  background-color: #f9fafb;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  padding: 1.1rem 1rem;
+  text-align: center; /* Center align for better look */
 }
 
-.feature h3 {
+body > div > section:nth-of-type(2) h2 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+}
+
+body > div > section:nth-of-type(2) p {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Make balance stand out */
+body > div > section:nth-of-type(2) > div:last-child p {
+  color: var(--primary);
+}
+
+/* ============================
+   FORM + CHART SECTION (3rd Section)
+   ============================ */
+
+body > div > section:nth-of-type(3) {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 1.75rem;
+  align-items: flex-start;
+  margin-bottom: 2.5rem;
+}
+
+body > div > section:nth-of-type(3) > div {
+  background-color: #f9fafb;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  padding: 1.25rem 1.25rem 1.5rem;
+}
+
+body > div > section:nth-of-type(3) h2 {
+  font-size: 1.1rem;
   margin-bottom: 1rem;
-  color: #4CAF50; /* Green highlight for consistency */
+  margin-top: 0;
 }
 
+/* ---------- Form styles ---------- */
 
-/* ================================
-   Step 6: Bottom CTA Section (MVP Requirement)
-   - Must include JS interaction:
-     • alert() message
-     • modal
-     • or smooth scroll
-================================ */
-.cta-section {
-  text-align: center;
-  padding: 3rem;
-  background: #4CAF50;  /* Green background for visibility */
-  color: #ffffff;
+form#transactionForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
 }
 
-.cta-section button {
-  background: #ffffff;
-  color: #4CAF50;
-  padding: 1rem 2rem;
-  border: none;
+form#transactionForm > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+}
+
+form#transactionForm label,
+form#transactionForm p {
+  font-weight: 600;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Type toggle row */
+form#transactionForm > div:first-of-type {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.75rem;
+}
+
+#expenseBtn,
+#incomeBtn {
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background-color: #ffffff;
+  color: var(--text-main);
+  font-size: 0.85rem;
   cursor: pointer;
-  font-size: 1.2rem;
-  border-radius: 5px;
-  transition: background 0.3s ease, transform 0.3s ease;
+  transition: all 0.15s ease;
 }
 
-.cta-section button:hover {
-  background: #f4f4f4;
-  transform: translateY(-3px); /* Small lift animation */
+#expenseBtn:hover,
+#incomeBtn:hover {
+  transform: translateY(-1px);
+  border-color: #d1d5db;
 }
 
+/* Active type state */
+#expenseBtn.active {
+  background-color: #fee2e2;
+  border-color: #f87171;
+  color: #b91c1c;
+}
+
+#incomeBtn.active {
+  background-color: #dcfce7;
+  border-color: #4ade80;
+  color: #166534;
+}
+
+input[type="number"],
+input[type="text"],
+input[type="date"],
+select {
+  padding: 0.5rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  background-color: #ffffff;
+  width: 100%;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+form#transactionForm button[type="submit"] {
+  margin-top: 0.5rem;
+  align-self: flex-start;
+  padding: 0.6rem 1.5rem;
+  border-radius: 999px;
+  border: none;
+  background-color: var(--primary);
+  color: #f9fafb;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease,
+    box-shadow 0.15s ease;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.35);
+}
+
+form#transactionForm button[type="submit"]:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+form#transactionForm button[type="submit"]:active {
+  transform: translateY(0);
+}
+
+/* ---------- Chart card ---------- */
+
+#spendingChart {
+  width: 100%;
+  max-height: 320px;
+}
+
+#noExpensesMsg {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ============================
+   TRANSACTION HISTORY SECTION (4th Section)
+   ============================ */
+
+body > div > section:nth-of-type(4) {
+  margin-top: 0.75rem;
+}
+
+body > div > section:nth-of-type(4) h2 {
+  margin-bottom: 1rem;
+  margin-top: 0;
+}
+
+#transactionList {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background-color: #f9fafb;
+  max-height: 340px;
+  overflow-y: auto;
+  padding: 0.5rem; /* Added padding so items don't hit edge */
+}
+
+#transactionList::-webkit-scrollbar {
+  width: 6px;
+}
+#transactionList::-webkit-scrollbar-track {
+  background: #e5e7eb;
+}
+#transactionList::-webkit-scrollbar-thumb {
+  background: #9ca3af;
+  border-radius: 999px;
+}
+
+/* Basic style for JS-generated items (recommended addition) */
+.transaction-item {
+    background: white;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#emptyState {
+  margin-top: 0.75rem;
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  background-color: #eff6ff;
+  color: #1d4ed8;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* ============================
+   RESPONSIVE BEHAVIOR
+   ============================ */
+
+@media (max-width: 900px) {
+  body > div {
+    margin: 1.5rem auto 2.5rem;
+    padding: 1.5rem 1.25rem 2rem;
+  }
+
+  /* Summary: 2 columns */
+  body > div > section:nth-of-type(2) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Form + chart stack */
+  body > div > section:nth-of-type(3) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  /* Summary: 1 column */
+  body > div > section:nth-of-type(2) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  form#transactionForm > div:first-of-type {
+    flex-wrap: wrap;
+  }
+  
+  form#transactionForm button[type="submit"] {
+    width: 100%;
+  }
+}
