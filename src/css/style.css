@@ -28,8 +28,7 @@ body {
   font-family: Arial, sans-serif;
   background-color: #ffffff; /* Clean white background */
   color: #333333;            /* Standard dark text */
-  line-height: 1.6;
-}
+  line-height: 1.6;}
 
 
 /* ================================
@@ -44,6 +43,7 @@ body {
   align-items: center;
   background: #333333;  /* Dark header */
   padding: 1rem 2rem;
+  color: white;
 }
 
 /* Nav links */
