@@ -1,2 +1,182 @@
+<<<<<<< HEAD
 
 
+=======
+/* =====================================
+   Case Study 1: Interactive Landing Page
+
+   This file includes:
+   - Navbar with 3+ links
+   - Hero section with headline + CTA
+   - Features section (3–4 cards)
+   - CTA section for JavaScript interaction
+   - Modal for popup interaction
+   - Responsive design + hamburger menu
+   ===== */
+
+/* ==========================================
+   Step 1: Reset default browser styles
+   ==== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ================================
+   Step 2: Global Body Styling - font, colors, and layout baseline.
+================================ */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #ffffff; /* Clean white background */
+  color: #333333;            /* Standard dark text */
+  line-height: 1.6;
+}
+
+
+/* ================================
+   Step 3: Navbar Styling (MVP Requirement)
+   - Contains 3+ navigation links
+   - Dark background with white text
+   - Includes hamburger menu for mobile
+================================ */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #333333;  /* Dark header */
+  padding: 1rem 2rem;
+}
+
+/* Nav links */
+.navbar a {
+  color: #ffffff;
+  text-decoration: none;
+  margin: 0 1rem;
+  transition: color 0.3s ease; /* Smooth hover animation */
+}
+
+.navbar a:hover {
+  color: #4CAF50; /* Green hover for interactivity */
+}
+
+/* Hamburger menu for < 768px screen */
+.hamburger {
+  display: none; 
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background: #ffffff;
+  margin: 4px 0;
+}
+
+
+/* ================================
+   Step 4: Hero Section (MVP Requirement)
+   - Includes headline and primary CTA button
+   - Background hero image with dark overlay
+================================ */
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 90vh; /* Large welcoming full-screen look */
+  text-align: center;
+  
+  /* Background image + overlay for readability */
+  background: linear-gradient(
+              rgba(0,0,0,0.5), 
+              rgba(0,0,0,0.5)
+            ),
+            url('IMAGE HERE') 
+            no-repeat center center/cover;
+
+  color: #ffffff;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* Main CTA button (used to trigger modal via JS) */
+.hero .cta-btn {
+  background: #4CAF50;  
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.hero .cta-btn:hover {
+  transform: scale(1.05);          /* Stretch goal: animated hover */
+  background: #388E3C;             /* Darker green */
+}
+
+
+/* ================================
+   Step 5: Features Section
+   - Displays 3–4 product highlights (MVP Requirement)
+   - Uses CSS Grid for responsiveness
+================================ */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 3rem;
+  background: #f4f4f4; /* Light contrast section */
+}
+
+/* Feature card design */
+.feature {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.feature h3 {
+  margin-bottom: 1rem;
+  color: #4CAF50; /* Green highlight for consistency */
+}
+
+
+/* ================================
+   Step 6: Bottom CTA Section (MVP Requirement)
+   - Must include JS interaction:
+     • alert() message
+     • modal
+     • or smooth scroll
+================================ */
+.cta-section {
+  text-align: center;
+  padding: 3rem;
+  background: #4CAF50;  /* Green background for visibility */
+  color: #ffffff;
+}
+
+.cta-section button {
+  background: #ffffff;
+  color: #4CAF50;
+  padding: 1rem 2rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.cta-section button:hover {
+  background: #f4f4f4;
+  transform: translateY(-3px); /* Small lift animation */
+}
+
+>>>>>>> kaniya
