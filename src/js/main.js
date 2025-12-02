@@ -89,3 +89,79 @@ transactionForm.addEventListener('submit', (e) => {
     // --- reset date --- //
     document.getElementById('date').valueAsDate = new Date ();
 });
+
+// ==============================
+// 5. CORE FUNCTIONS
+// ==============================
+
+function updateUI() {
+    updateSummary();
+    renderHistory();
+    renderChart(); // Update the chart if possible
+}
+
+function updateTypeButtons() {
+    // Simple style toggle to show active button
+    if (currentType === 'expense') {
+        expenseBtn.style.backgroundColor = '#ffcccb'; // Light red
+        incomeBtn.style.backgroundColor = ''; // Default
+    } else {
+        incomeBtn.style.backgroundColor = '#d4edda'; // Light green
+        expenseBtn.style.backgroundColor = ''; // Default
+    }
+}
+
+function updateSummary() {
+    // Calculate totals
+    const income = transactions
+        .filter(t => t.type === 'income')
+        .reduce((sum, t) => sum + t.amount, 0);
+
+    const expenses = transactions
+        .filter(t => t.type === 'expense')
+        .reduce((sum, t) => sum + t.amount, 0);
+
+    const balance = income - expenses;
+
+    // Update HTML
+    totalIncomeEl.textContent = `$${income.toFixed(2)}`;
+    totalExpensesEl.textContent = `$${expenses.toFixed(2)}`;
+    balanceEl.textContent = `$${balance.toFixed(2)}`;
+}
+
+function renderHistory() {
+    // Clear current list
+    transactionList.innerHTML = '';
+
+    if (transactions.length === 0) {
+        emptyState.style.display = 'block';
+    } else {
+        emptyState.style.display = 'none';
+        
+        // Loop through recent transactions
+        transactions.forEach(t => {
+            const item = document.createElement('div');
+            // Adding a class for styling later
+            item.classList.add('transaction-item'); 
+            
+            // Set color based on type
+            const amountColor = t.type === 'income' ? 'green' : 'red';
+            const sign = t.type === 'income' ? '+' : '-';
+
+            item.innerHTML = `
+                <div style="border-bottom: 1px solid #ccc; padding: 10px; display: flex; justify-content: space-between;">
+                    <div>
+                        <strong>${t.description}</strong> <br>
+                        <small>${t.date} | ${t.category}</small>
+                    </div>
+                    <div style="color: ${amountColor}; font-weight: bold;">
+                        ${sign}$${t.amount.toFixed(2)}
+                    </div>
+                </div>
+            `;
+            
+            // Add to the top of the list
+            transactionList.prepend(item);
+        });
+    }
+}
